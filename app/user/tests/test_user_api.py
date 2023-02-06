@@ -102,10 +102,10 @@ class PublicUserApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_retrieve_user_unauthorized(self):
-        """Test authentication is required for user."""
+        """Test authentication is required for users."""
         res = self.client.get(ME_URL)
 
-        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORISED)
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
 
 
 class PrivateUserAPITests(TestCase):
@@ -141,7 +141,7 @@ class PrivateUserAPITests(TestCase):
 
         res = self.client.patch(ME_URL, payload)
 
-        self.user.refresh_fromdb()
+        self.user.refresh_from_db()
         self.assertEqual(self.user.name, payload["name"])
         self.assertTrue(self.user.check_password(payload["password"]))
         self.assertEqual(res.status_code, status.HTTP_200_OK)
