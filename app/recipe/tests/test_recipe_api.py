@@ -52,6 +52,7 @@ class PrivateRecipeApiTests(TestCase):
         self.user = get_user_model().objects.create_user(
             'user@example.com',
             'testpass123',
+        )
         self.user = create_user(
             email='user@example.com',
             password='testpass123',
@@ -73,6 +74,7 @@ class PrivateRecipeApiTests(TestCase):
         other_user = get_user_model().objects.create_user(
             'other@example.com',
             'password123',
+        )
         other_user = create_user(
             email='other@example.com',
             password='password123',
